@@ -20,7 +20,29 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             flex: 7,
-            child: Container(color: Colors.yellow,),),
+            child: Container(
+              color: Colors.yellow,
+              child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(36, 20, 36, 20),
+                  itemCount: 30,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    crossAxisCount: 5,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      color: Colors.black,
+                      child: Center(
+                        child: Text(
+                          index.toString(),
+                        ), 
+                      ),
+                    );
+                  },
+                ),
+            ),),
           Expanded(
             flex: 4,
             child: Container(color: Colors.blue,),),
