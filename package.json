@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "firebase": "^10.11.1",
+    "tool": "^21.0.0"
+  }
+}
