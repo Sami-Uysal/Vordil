@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,8 +16,16 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: const Center(
-        child: Text('Hello, World!'),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 7,
+            child: Container(color: Colors.yellow,),),
+          Expanded(
+            flex: 4,
+            child: Container(color: Colors.blue,),),
+          
+        ],
       ),
     );
   }
