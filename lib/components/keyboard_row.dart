@@ -48,9 +48,9 @@ class KeyboardRow extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6),
                         child: SizedBox(
                           width: e.key == 'ENTER' || e.key == 'BACK'
-                              ? size.width * 0.13
-                              : size.width * 0.085,
-                          height: size.height * 0.090,
+                              ? size.width * 0.12
+                              : size.width * 0.065,
+                          height: size.height * 0.075,
                           child: Material(
                             color: color,
                             child: InkWell(

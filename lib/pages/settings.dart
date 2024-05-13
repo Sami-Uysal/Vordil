@@ -14,7 +14,7 @@ class Settings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Settings'),
+        title: const Text('Ayarlar'),
         centerTitle: true,
         elevation: 0,
         actions: [
@@ -33,7 +33,7 @@ class Settings extends StatelessWidget {
               _isSwitched = notifier.isDark;
 
               return SwitchListTile(
-                title: const Text('Dark Theme'),
+                title: const Text('Koyu Tema'),
                 value: _isSwitched,
                 onChanged: (value) {
                   _isSwitched = value;
@@ -45,13 +45,13 @@ class Settings extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Reset Statistics'),
+            title: const Text('İstatistikleri Sıfırla'),
             onTap: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.remove('stats');
               prefs.remove('chart');
               prefs.remove('row');
-              runQuickBox(context: context, message: 'Statistics Reset');
+              runQuickBox(context: context, message: 'İstatistikler Sıfırlandı');
             },
           )
         ],

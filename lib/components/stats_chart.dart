@@ -58,7 +58,7 @@ class StatsChart extends StatelessWidget {
                       outsideLabelStyleSpec: charts.TextStyleSpec(
                         color: color,
                       )),
-                  behaviors: [charts.ChartTitle('GUESS DISTRIBUTION')],
+                  behaviors: [charts.ChartTitle('TAHMİN DAĞILIMI')],
                 );
               },
             );

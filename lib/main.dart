@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           return Consumer<ThemeProvider>(
             builder: (_, notifier, __) => MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Wordle Clone',
+              title: 'Vordıl',
               theme: notifier.isDark ? darkTheme : lightTheme,
               home: const Material(child: HomePage()),
             ),

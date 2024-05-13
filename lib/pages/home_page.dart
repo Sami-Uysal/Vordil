@@ -37,21 +37,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wordle'),
+        title: const Text('Vordıl'),
         centerTitle: true,
         elevation: 0,
         actions: [
           Consumer<Controller>(
             builder: (_, notifier, __) {
               if (notifier.notEnoughLetters) {
-                runQuickBox(context: context, message: 'Not Enough Letters');
+                runQuickBox(context: context, message: 'Yeterli Harf Yok');
               }
               if (notifier.gameCompleted) {
                 if (notifier.gameWon) {
                   if (notifier.currentRow == 6) {
-                    runQuickBox(context: context, message: 'Phew!');
+                    runQuickBox(context: context, message: 'Vay!');
                   } else {
-                    runQuickBox(context: context, message: 'Splendid!');
+                    runQuickBox(context: context, message: 'Muhteşem!');
                   }
                 } else {
                   runQuickBox(context: context, message: notifier.correctWord);
@@ -95,15 +95,15 @@ class _HomePageState extends State<HomePage> {
               children: const [
                 KeyboardRow(
                   min: 1,
-                  max: 10,
+                  max: 12,
                 ),
                 KeyboardRow(
-                  min: 11,
-                  max: 19,
+                  min: 13,
+                  max: 23,
                 ),
                 KeyboardRow(
-                  min: 20,
-                  max: 29,
+                  min: 24,
+                  max: 34,
                 ),
               ],
             ),

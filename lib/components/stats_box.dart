@@ -26,7 +26,7 @@ class StatsBox extends StatelessWidget {
               icon: const Icon(Icons.clear)),
           const Expanded(
               child: Text(
-            'STATISTICS',
+            'İSTATİSTİKLER',
             textAlign: TextAlign.center,
           )),
           Expanded(
@@ -41,15 +41,15 @@ class StatsBox extends StatelessWidget {
                 return Row(
                   children: [
                     StatsTile(
-                      heading: 'Played',
+                      heading: 'Oynandı',
                       value: int.parse(results[0]),
                     ),
-                    StatsTile(heading: 'Win %', value: int.parse(results[2])),
+                    StatsTile(heading: 'Kazanma %\n\'si', value: int.parse(results[2])),
                     StatsTile(
-                        heading: 'Current\nStreak',
+                        heading: 'Güncel\nSeri',
                         value: int.parse(results[3])),
                     StatsTile(
-                        heading: 'Max\nStreak', value: int.parse(results[4])),
+                        heading: 'Maks.\nSeri', value: int.parse(results[4])),
                   ],
                 );
               },
@@ -75,7 +75,7 @@ class StatsBox extends StatelessWidget {
                         (route) => false);
                   },
                   child: const Text(
-                    'Replay',
+                    'Tekrar Oyna',
                     style: TextStyle(
                       fontSize: 30,
                     ),
