@@ -1,23 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:vordil/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:vordil/providers/theme_provider.dart';
+import 'package:vordil/utils/theme_preferences.dart';
+
+import 'constants/themes.dart';
+import 'providers/controller.dart';
+import 'pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Vordıl',
-      theme: ThemeData(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Controller()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ],
+      child: FutureBuilder(
+        initialData: false,
+        future: ThemePreferences.getTheme(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+              Provider.of<ThemeProvider>(context, listen: false)
+                  .setTheme(turnOn: snapshot.data as bool);
+            });
+          }
+          return Consumer<ThemeProvider>(
+            builder: (_, notifier, __) => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Wordle Clone',
+              theme: notifier.isDark ? darkTheme : lightTheme,
+              home: const Material(child: HomePage()),
+            ),
+          );
+        },
       ),
-      home: const HomePage(),
     );
   }
 }
-
