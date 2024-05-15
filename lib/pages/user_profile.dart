@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import '../data/auth_service.dart';
+import 'login_page.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
+
+  void _signOut(BuildContext context) async {
+    await AuthService().signOut();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +16,12 @@ class UserProfile extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Kullanıcı Profili'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _signOut(context),
+          ),
+        ],
       ),
       body: Center(
         child: Column(

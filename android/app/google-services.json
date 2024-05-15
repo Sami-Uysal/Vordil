@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "608962525480",
+    "project_id": "vordil",
+    "storage_bucket": "vordil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608962525480:android:9245a01030cf1b8529f81d",
+        "android_client_info": {
+          "package_name": "com.example.vordil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608962525480-344osgsfretn807udgmqr20gkkml3vr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeG72w088_0dZ49H3G9xfU-umr6ZZPEJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608962525480-344osgsfretn807udgmqr20gkkml3vr7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608962525480-2mcjauug6o4attdumldgi5obq71s1s8b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.vordil"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

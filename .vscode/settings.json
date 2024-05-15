@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/Projects/Flutter/vordil/linux"
+    "cmake.sourceDirectory": "D:/Projects/Flutter/vordil/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
