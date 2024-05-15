@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vordil/pages/settings.dart';
@@ -9,6 +8,7 @@ import '../components/keyboard_row.dart';
 import '../components/stats_box.dart';
 import '../constants/words.dart';
 import '../providers/controller.dart';
+import 'package:vordil/pages/user_profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -79,7 +79,13 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Settings()));
               },
-              icon: const Icon(Icons.settings))
+              icon: const Icon(Icons.settings)),
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const UserProfile()));
+              },
+              icon: const Icon(Icons.person))  // User Icon
         ],
       ),
       body: Column(
