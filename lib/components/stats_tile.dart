@@ -23,7 +23,7 @@ class StatsTile extends StatelessWidget {
                 padding: const EdgeInsets.all(1),
                 child: Text(
                   value.toString(),
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 40,
                       ),
                   textAlign: TextAlign.center,
@@ -38,7 +38,7 @@ class StatsTile extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                 child: Text(
                   heading,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.normal,
                         fontSize: 12,
                       ),

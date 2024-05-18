@@ -6,7 +6,7 @@ import 'package:vordil/utils/theme_preferences.dart';
 
 import 'constants/themes.dart';
 import 'providers/controller.dart';
-import 'pages/login_page.dart';
+import 'pages/auth_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Vordıl',
               theme: notifier.isDark ? darkTheme : lightTheme,
-              home: const LoginPage(),
+              home: const AuthPage(),
             ),
           );
         },

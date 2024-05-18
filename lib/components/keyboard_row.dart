@@ -38,42 +38,39 @@ class KeyboardRow extends StatelessWidget {
                 } else if (e.value == AnswerStage.incorrect) {
                   color = Theme.of(context).primaryColorDark;
                 } else {
-                  keyColor = Theme.of(context).textTheme.bodyText2?.color ??
-                      Colors.black;
+                  keyColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
                 }
 
                 return Padding(
-                    padding: EdgeInsets.all(size.width * 0.006),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6),
-                        child: SizedBox(
-                          width: e.key == 'ENTER' || e.key == 'BACK'
-                              ? size.width * 0.12
-                              : size.width * 0.065,
-                          height: size.height * 0.075,
-                          child: Material(
-                            color: color,
-                            child: InkWell(
-                                onTap: () {
-                                  Provider.of<Controller>(context,
-                                          listen: false)
-                                      .setKeyTapped(value: e.key);
-                                },
-                                child: Center(
-                                  child: e.key == 'BACK'
-                                      ? const Icon(Icons.backspace_outlined)
-                                      : Text(
-                                          e.key,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2
-                                              ?.copyWith(
-                                                color: keyColor,
-                                              ),
+                  padding: EdgeInsets.all(size.width * 0.006),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: SizedBox(
+                      width: e.key == 'ENTER' || e.key == 'BACK'
+                          ? size.width * 0.12
+                          : size.width * 0.065,
+                      height: size.height * 0.075,
+                      child: Material(
+                        color: color,
+                        child: InkWell(
+                          onTap: () {
+                            Provider.of<Controller>(context, listen: false).setKeyTapped(value: e.key);
+                          },
+                          child: Center(
+                            child: e.key == 'BACK'
+                                ? const Icon(Icons.backspace_outlined)
+                                : Text(
+                                    e.key,
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                          color: keyColor,
                                         ),
-                                )),
+                                  ),
                           ),
-                        )));
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               } else {
                 return const SizedBox();
               }

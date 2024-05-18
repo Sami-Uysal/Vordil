@@ -4,7 +4,7 @@ import 'package:vordil/utils/calculate_stats.dart';
 import 'package:vordil/components/stats_tile.dart';
 import 'package:vordil/constants/answer_stages.dart';
 import 'package:vordil/data/keys_map.dart';
-import '../main.dart';
+import 'package:vordil/pages/home_page.dart';
 
 class StatsBox extends StatelessWidget {
   const StatsBox({Key? key}) : super(key: key);
@@ -66,13 +66,14 @@ class StatsBox extends StatelessWidget {
                     backgroundColor: Colors.green,
                   ),
                   onPressed: () {
-                    keysMap.updateAll(
-                        (key, value) => value = AnswerStage.notAnswered);
-
+  
+                    keysMap.updateAll((key, value) => value = AnswerStage.notAnswered);
+  
                     Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MyApp()),
-                        (route) => false);
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      (route) => false,
+                    );
                   },
                   child: const Text(
                     'Tekrar Oyna',

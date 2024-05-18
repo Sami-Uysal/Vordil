@@ -22,8 +22,7 @@ class Tile extends StatefulWidget {
 class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
-  Color _backgroundColor = Colors.transparent,
-      _borderColor = Colors.transparent;
+  Color _backgroundColor = Colors.transparent, _borderColor = Colors.transparent;
   late AnswerStage _answerStage;
 
   @override
@@ -71,8 +70,7 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
           } else if (_answerStage == AnswerStage.incorrect) {
             _backgroundColor = Theme.of(context).primaryColorDark;
           } else {
-            fontColor =
-                Theme.of(context).textTheme.bodyText2?.color ?? Colors.black;
+            fontColor = Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black;
             _backgroundColor = Colors.transparent;
           }
         }
@@ -103,8 +101,7 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
                           child: flip > 0
                               ? Text(
                                   text,
-                                  style: const TextStyle()
-                                      .copyWith(color: fontColor),
+                                  style: const TextStyle().copyWith(color: fontColor),
                                 )
                               : Text(text)))),
             );

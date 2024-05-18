@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vordil/pages/settings.dart';
 import 'package:vordil/utils/quick_box.dart';
+import 'dart:math';
 import '../components/grid.dart';
 import '../components/keyboard_row.dart';
 import '../components/stats_box.dart';
@@ -26,8 +26,7 @@ class _HomePageState extends State<HomePage> {
     _word = words[r];
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      Provider.of<Controller>(context, listen: false)
-          .setCorrectWord(word: _word);
+      Provider.of<Controller>(context, listen: false).setCorrectWord(word: _word);
     });
 
     super.initState();
@@ -60,32 +59,31 @@ class _HomePageState extends State<HomePage> {
                   const Duration(milliseconds: 4000),
                   () {
                     if (mounted) {
-                      showDialog(
-                          context: context, builder: (_) => const StatsBox());
+                      showDialog(context: context, builder: (_) => const StatsBox());
                     }
                   },
                 );
               }
               return IconButton(
-                  onPressed: () async {
-                    showDialog(
-                        context: context, builder: (_) => const StatsBox());
-                  },
-                  icon: const Icon(Icons.bar_chart_outlined));
+                onPressed: () async {
+                  showDialog(context: context, builder: (_) => const StatsBox());
+                },
+                icon: const Icon(Icons.bar_chart_outlined),
+              );
             },
           ),
           IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Settings()));
-              },
-              icon: const Icon(Icons.settings)),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Settings()));
+            },
+            icon: const Icon(Icons.settings),
+          ),
           IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const UserProfile()));
-              },
-              icon: const Icon(Icons.person))  // User Icon
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserProfile()));
+            },
+            icon: const Icon(Icons.person), // User Icon
+          ),
         ],
       ),
       body: Column(
@@ -99,18 +97,9 @@ class _HomePageState extends State<HomePage> {
             flex: 4,
             child: Column(
               children: const [
-                KeyboardRow(
-                  min: 1,
-                  max: 12,
-                ),
-                KeyboardRow(
-                  min: 13,
-                  max: 23,
-                ),
-                KeyboardRow(
-                  min: 24,
-                  max: 34,
-                ),
+                KeyboardRow(min: 1, max: 12),
+                KeyboardRow(min: 13, max: 23),
+                KeyboardRow(min: 24, max: 34),
               ],
             ),
           ),
