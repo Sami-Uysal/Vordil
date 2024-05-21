@@ -50,35 +50,68 @@ class _AuthPageState extends State<AuthPage> {
         title: Text(_isLogin ? 'Giriş' : 'Kayıt'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (!_isLogin)
-              TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Kullanıcı Adı'),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50.0),
+                child: Image.asset(
+                  'lib/assets/icon/vordıl.jpeg',
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                ),
               ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(labelText: 'Şifre'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _authenticate,
-              child: Text(_isLogin ? 'Giriş Yap' : 'Kayıt Ol'),
-            ),
-            TextButton(
-              onPressed: _toggleForm,
-              child: Text(_isLogin ? 'Kayıt Ol' : 'Giriş'),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Card(
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      if (!_isLogin)
+                        TextField(
+                          controller: _nameController,
+                          decoration: const InputDecoration(labelText: 'Kullanıcı Adı'),
+                        ),
+                      TextField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(labelText: 'Email'),
+                      ),
+                      TextField(
+                        controller: _passwordController,
+                        decoration: const InputDecoration(labelText: 'Şifre'),
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: _authenticate,
+                        child: Text(_isLogin ? 'Giriş Yap' : 'Kayıt Ol'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          textStyle: const TextStyle(fontSize: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: _toggleForm,
+                        child: Text(_isLogin ? 'Kayıt Ol' : 'Giriş'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

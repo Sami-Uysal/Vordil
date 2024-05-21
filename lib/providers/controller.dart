@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:vordil/constants/answer_stages.dart';
 import 'package:vordil/models/tile_model.dart';
 import 'package:vordil/utils/calculate_chart_stats.dart';
-
-import '../utils/calculate_stats.dart';
-import '../data/keys_map.dart';
+import 'package:vordil/utils/calculate_stats.dart';
+import 'package:vordil/data/keys_map.dart';
 
 class Controller extends ChangeNotifier {
   bool checkLine = false,
@@ -18,6 +17,20 @@ class Controller extends ChangeNotifier {
   List<TileModel> tilesEntered = [];
 
   setCorrectWord({required String word}) => correctWord = word;
+
+  void resetGame() {
+    checkLine = false;
+    backOrEnterTapped = false;
+    gameWon = false;
+    gameCompleted = false;
+    notEnoughLetters = false;
+    correctWord = "";
+    currentTile = 0;
+    currentRow = 0;
+    tilesEntered.clear();
+    keysMap.updateAll((key, value) => AnswerStage.notAnswered);
+    notifyListeners();
+  }
 
   setKeyTapped({required String value}) {
     if (value == 'ENTER') {

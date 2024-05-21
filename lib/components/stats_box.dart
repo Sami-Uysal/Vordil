@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vordil/providers/controller.dart';
 import 'package:vordil/components/stats_chart.dart';
 import 'package:vordil/utils/calculate_stats.dart';
 import 'package:vordil/components/stats_tile.dart';
-import 'package:vordil/constants/answer_stages.dart';
-import 'package:vordil/data/keys_map.dart';
 import 'package:vordil/pages/home_page.dart';
 
 class StatsBox extends StatelessWidget {
@@ -66,9 +66,9 @@ class StatsBox extends StatelessWidget {
                     backgroundColor: Colors.green,
                   ),
                   onPressed: () {
-  
-                    keysMap.updateAll((key, value) => value = AnswerStage.notAnswered);
-  
+                    final controller = Provider.of<Controller>(context, listen: false);
+                    controller.resetGame();
+
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => const HomePage()),
