@@ -44,6 +44,7 @@ dependencies:
   firebase_database: ^10.5.5
   firebase_app_check: ^0.2.2+5
   flutter_launcher_icons: ^0.9.2
+  lottie: ^1.0.1
 
 flutter_icons:
   android: true
@@ -77,6 +78,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - lib/assets/icon/vordıl.jpeg
+     - lib/assets/animations/congratulations.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

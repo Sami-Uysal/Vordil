@@ -5,6 +5,7 @@ import 'package:vordil/components/stats_chart.dart';
 import 'package:vordil/utils/calculate_stats.dart';
 import 'package:vordil/components/stats_tile.dart';
 import 'package:vordil/pages/home_page.dart';
+import 'package:vordil/pages/reward_page.dart';
 
 class StatsBox extends StatelessWidget {
   const StatsBox({Key? key}) : super(key: key);
@@ -38,6 +39,17 @@ class StatsBox extends StatelessWidget {
                 if (snapshot.hasData) {
                   results = snapshot.data as List<String>;
                 }
+                final currentStreak = int.parse(results[3]);
+
+                if (currentStreak >= 5) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RewardPage()),
+                    );
+                  });
+                }
+
                 return Row(
                   children: [
                     StatsTile(
@@ -47,7 +59,7 @@ class StatsBox extends StatelessWidget {
                     StatsTile(heading: 'Kazanma %\n\'si', value: int.parse(results[2])),
                     StatsTile(
                         heading: 'Güncel\nSeri',
-                        value: int.parse(results[3])),
+                        value: currentStreak),
                     StatsTile(
                         heading: 'Maks.\nSeri', value: int.parse(results[4])),
                   ],
