@@ -79,6 +79,11 @@ flutter:
   assets:
      - lib/assets/icon/vordıl.jpeg
      - lib/assets/animations/congratulations.json
+     - lib/assets/avatars/avatar1.jpeg
+     - lib/assets/avatars/avatar2.jpeg
+     - lib/assets/avatars/avatar3.jpeg
+     - lib/assets/avatars/avatar4.jpeg
+     - lib/assets/avatars/avatar5.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

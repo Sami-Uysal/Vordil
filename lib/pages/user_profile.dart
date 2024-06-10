@@ -16,8 +16,17 @@ class _UserProfileState extends State<UserProfile> {
   late String _name;
   late String _email;
   late int _level;
+  String? _selectedAvatar;
   bool isLoading = true;
   bool isEditing = false;
+
+  final List<String> _avatars = [
+    'lib/assets/avatars/avatar1.jpeg',
+    'lib/assets/avatars/avatar2.jpeg',
+    'lib/assets/avatars/avatar3.jpeg',
+    'lib/assets/avatars/avatar4.jpeg',
+    'lib/assets/avatars/avatar5.jpeg',
+  ];
 
   @override
   void initState() {
@@ -26,12 +35,35 @@ class _UserProfileState extends State<UserProfile> {
     _name = _user.displayName ?? '';
     _email = _user.email ?? '';
     _level = 1;
-    isLoading = false;
+    _selectedAvatar = _avatars[0];
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    try {
+      UserService userService = UserService();
+      Map<String, dynamic> userData = await userService.getUserData(_user.uid);
+
+      setState(() {
+        _name = userData['name'] ?? _name;
+        _email = userData['email'] ?? _email;
+        _level = userData['level'] ?? _level;
+        _selectedAvatar = userData['avatar'] ?? _selectedAvatar;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Kullanıcı verilerini yüklerken hata oluştu: $e')));
+    }
   }
 
   void _signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AuthPage()));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const AuthPage()));
   }
 
   Future<void> _updateUserData() async {
@@ -44,16 +76,22 @@ class _UserProfileState extends State<UserProfile> {
 
         UserService userService = UserService();
         await userService.updateUserData({
+          'userId': _user.uid,
           'name': _name,
           'email': _email,
           'level': _level,
+          'avatar': _selectedAvatar,
         });
 
         setState(() {
           isEditing = false;
         });
+      } on FirebaseAuthException catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Firebase Auth hatası: ${e.message}')));
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('İşlem başarısız oldu')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Veri güncellenirken hata oluştu: $e')));
       }
     }
   }
@@ -119,6 +157,42 @@ class _UserProfileState extends State<UserProfile> {
                             },
                           ),
                           const SizedBox(height: 20),
+                          const Text('Avatar Seç'),
+                          const SizedBox(height: 10),
+                          Expanded(
+                            child: GridView.builder(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                              ),
+                              itemCount: _avatars.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedAvatar = _avatars[index];
+                                    });
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Image.asset(_avatars[index]),
+                                      if (_avatars[index] == _selectedAvatar)
+                                        const Positioned(
+                                          top: 0,
+                                          right: 0,
+                                          child: Icon(
+                                            Icons.check_circle,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: _updateUserData,
                             child: const Text('Kaydet'),
@@ -139,8 +213,9 @@ class _UserProfileState extends State<UserProfile> {
                 : Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 50,
+                        backgroundImage: AssetImage(_selectedAvatar!),
                       ),
                       const SizedBox(height: 20),
                       Text(

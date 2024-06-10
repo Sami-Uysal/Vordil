@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../data/auth_service.dart';
+import '../data/user_service.dart';
 import 'home_page.dart';
 
 class AuthPage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _AuthPageState extends State<AuthPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final AuthService _authService = AuthService();
+  final UserService _userService = UserService();
 
   bool _isLogin = true;
 
@@ -34,12 +36,25 @@ class _AuthPageState extends State<AuthPage> {
       user = await _authService.signInWithEmail(email, password);
     } else {
       user = await _authService.registerWithEmail(email, password, name);
+      if (user != null) {
+        await _userService.updateUserData({
+          'userId': user.uid,
+          'name': name,
+          'email': email,
+          'level': 1,
+          'avatar': 'lib/assets/avatars/avatar1.jpeg',
+        });
+      }
     }
 
     if (user != null) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('İşlem başarısız oldu')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('İşlem başarısız oldu')),
+      );
     }
   }
 

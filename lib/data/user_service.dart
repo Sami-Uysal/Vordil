@@ -1,49 +1,33 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class UserService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final DatabaseReference _database = FirebaseDatabase.instance.reference().child('users');
 
-  Future<Map<String, dynamic>?> getUserData() async {
-    User? user = _auth.currentUser;
-    if (user == null) {
-      return null;
+  Future<void> _ensureUsersPathExists() async {
+    DatabaseEvent event = await _database.once();
+    DataSnapshot snapshot = event.snapshot;
+
+    if (snapshot.value == null) {
+      await _database.set({});
     }
-
-    DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
-    return userDoc.data() as Map<String, dynamic>?;
   }
 
-  Future<void> updateUserData(Map<String, dynamic> newData) async {
-    User? user = _auth.currentUser;
-    if (user == null) {
-      return;
-    }
+  Future<void> updateUserData(Map<String, dynamic> data) async {
+    await _ensureUsersPathExists();
 
-    await _firestore.collection('users').doc(user.uid).update(newData);
+    String userId = data['userId'];
+    await _database.child(userId).update(data);
   }
 
-  Future<void> incrementUserLevel() async {
-    User? user = _auth.currentUser;
-    if (user == null) {
-      return;
-    }
+  Future<Map<String, dynamic>> getUserData(String userId) async {
+    await _ensureUsersPathExists();
 
-    DocumentReference userDoc = _firestore.collection('users').doc(user.uid);
-
-    try {
-      await _firestore.runTransaction((transaction) async {
-        DocumentSnapshot snapshot = await transaction.get(userDoc);
-        if (!snapshot.exists) {
-          transaction.set(userDoc, {'level': 1});
-        } else {
-          int newLevel = (snapshot.data() as Map<String, dynamic>)['level'] + 1;
-          transaction.update(userDoc, {'level': newLevel});
-        }
-      });
-    } catch (e) {
-      print('Kullanıcı seviyesi artırılırken hata oluştu: $e');
+    DatabaseEvent event = await _database.child(userId).once();
+    DataSnapshot snapshot = event.snapshot;
+    if (snapshot.value != null) {
+      return Map<String, dynamic>.from(snapshot.value as Map);
+    } else {
+      return {};
     }
   }
 }
